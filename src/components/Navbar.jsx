@@ -1,98 +1,86 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import "../styles/Layout.css";
 
+const THEME_STORAGE_KEY = "mf_theme";
+
+const navItems = [
+  { to: "/", label: "Home" },
+  { to: "/bmr", label: "BMR Calculator" },
+  { to: "/target", label: "Meal Target" },
+  { to: "/news", label: "Food News" },
+  { to: "/profile", label: "Profile" },
+];
 
 export default function Navbar() {
-    return (
-        <>
-            <div className="container mt-5" >
-                <div className="row nav">
-                    <div className="col">
-                        <div>
-                            <Link className="nav-item" to="/">
-                                Home
-                            </Link>
-                           
-                            <Link className="nav-item" to="/BMR">
-                               Calculate BMR
-                            </Link>
-                            
-                            <Link className="nav-item" to="/news">
-                                Food News
-                            </Link>
-                           
-                            <Link className="nav-item" to="/profile">
-                                Profile
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="col-md-auto" />
-                    <div className="col-md-1">
-                        <div>
-                            {localStorage.getItem("auth") ? (
-                                <>
-                                    <Link
-                                        className="text-decoration-none nav-item d-flex justify-content-end align-items-center gap-2 d-lg-flex d-none"
-                                        onClick={() => {
-                                            localStorage.clear();
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem(THEME_STORAGE_KEY) || "light");
 
-                                            window.location.href = "/login";
-                                        }}
-                                    >
-                                        Logout
-                                    </Link>
-                                </>
-                            ) : (
-                                <>
-                                    <Link
-                                        className="text-decoration-none nav-item d-flex justify-content-end align-items-center gap-2 d-lg-flex d-none"
-                                        to="/login"
-                                    >
-                                        Login
-                                    </Link>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-2 d-flex justify-content-end align-items-center hide-desktop">
-                <button
-                    className="btn"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseExample"
-                    aria-expanded="false"
-                    aria-controls="collapseExample"
-                >
-                    <img src="/images/menu.png" alt='Nav Menu' width="35px" height="35px" />
-                </button>
-            </div>
-            <div className="collapse" id="collapseExample">
-                <div className="card card-body">
-                    <Link className="nav-item fw-bold mb-3 mt-3 text-center" to="/">
-                        Home
-                    </Link>
-                    {/* <Link
-                        className="nav-item fw-bold text-decoration-none mb-3 text-center"
-                        to="/add-recipe"
-                    >
-                        Add Recipe
-                    </Link> */}
-                    <Link
-                        className="nav-item fw-bold text-decoration-none mb-3 text-center"
-                        to="/profile"
-                    >
-                        Profile
-                    </Link>
-                    <Link
-                        className="nav-item fw-bold text-decoration-none mb-3 text-center"
-                        to="/login"
-                    >
-                        Login
-                    </Link>
-                </div>
-            </div>
-        </>
-    )
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
+
+  const isLoggedIn = Boolean(localStorage.getItem("auth") || localStorage.getItem("token"));
+
+  return (
+    <header className="app-header sticky-top">
+      <nav className="container navbar-shell" aria-label="Main navigation">
+        <Link className="brand" to="/">
+          <span className="brand-mark">🍽️</span>
+          MealsFindByBMR
+        </Link>
+
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-expanded={menuOpen}
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
+
+        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              className={`nav-link ${location.pathname === item.to ? "active" : ""}`}
+              to={item.to}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+
+          <button
+            type="button"
+            className="theme-switch"
+            onClick={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
+            aria-label="Toggle light or dark mode"
+          >
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          </button>
+
+          {isLoggedIn ? (
+            <Link
+              className="auth-link"
+              to="/login"
+              onClick={() => {
+                localStorage.removeItem("auth");
+                localStorage.removeItem("token");
+              }}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link className="auth-link" to="/login">
+              Login
+            </Link>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
 }

@@ -1,20 +1,26 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/Layout.css";
 
 export default function Footer() {
-    return (
-        <>
-            {/* start of footer */}
-            <footer style={{ position: "relative" }}>
-                <div>
-                    <h2 className="text-primary text-center">Are you hungry?</h2>
-                    <h1 className='text-primary-bold text-center'>Don't Wait!</h1>
-                    <p className="text-muted text-center">
-                        Let Start to find food by Calories...
-                    </p>
-                </div>
-                
-            </footer>
-            {/* end of footer */}
-        </>
-    )
+  return (
+    <footer className="app-footer">
+      <div className="container footer-content">
+        <div>
+          <h2>Eat Better, Feel Better.</h2>
+          <p>
+            Build your meal routine with calorie-smart recipes, BMR insights, and practical planning tools that keep
+            you consistent every day.
+          </p>
+        </div>
+
+        <div className="footer-links">
+          <Link to="/">Explore Recipes</Link>
+          <Link to="/bmr">Calculate BMR</Link>
+          <Link to="/target">Find by Calories</Link>
+        </div>
+      </div>
+      <p className="footer-note">© {new Date().getFullYear()} MealsFindByBMR · Crafted for healthier choices.</p>
+    </footer>
+  );
 }
