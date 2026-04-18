@@ -1,348 +1,242 @@
-@font-face {
-    font-family: airbnbcereal;
-    src: url(../../public/fonts/airbnbcereal.otf);
+.home-page {
+  padding: 24px 0 64px;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 80vh;
 }
 
-/* Navbar Style */
-.nav-item {
-    font-family: "airbnbcereal";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 23px;
-    text-align: center;
-    text-decoration: none;
-    margin-right: 10vh;
-    color: #2E266F;
+.hero-panel {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: center;
 }
 
-.active {
-    text-decoration: underline;
+.hero-copy h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
 }
 
-/* Hero style */
-.bg-yellow {
-    background-color: #7FDA89;
-    height: 100vh;
-    width: 25%;
-    max-width:100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
+.hero-copy p {
+  color: var(--text-secondary);
+  max-width: 620px;
 }
 
-.hero img {
-    position: absolute;
-    right: 17vh;
-    top: 20vh;
-    width: 30%;
-    height: auto;
-    max-width:100%;
+.hero-badge {
+  display: inline-flex;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  padding: 8px 12px;
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
-.hero-text {
-    font-family: 'airbnbcereal';
-    font-style: normal;
-    font-weight: 500;
-    line-height: 90px;
-    align-items: center;
-    color: #2E266F;
-    max-width:100vh;
-}
-.hero-nav{
-    font-size: 25px;
-    font-family: 'airbnbcereal';
-    text-decoration: none;
-    color: #2E266F;
-    align-items: center;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
 }
 
-.hero-subtitle {
-    max-width: 520px;
-    color: #6f6f6f;
-    font-size: 18px;
-    margin-top: 12px;
+.hero-visual img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+  max-height: 430px;
+  object-fit: cover;
 }
 
-.calorie-search-wrap {
-    max-width: 500px;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 12px 32px rgba(46, 38, 111, 0.08);
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
 }
 
-/* Main Section Style */
-.main-section-recipe {
-    position: relative;
-    margin-bottom: 20vh;
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 18px;
 }
 
-.main-section-recipe h3 {
-    position: relative;
-    bottom: 5vh;
-    font-family: 'airbnbcereal';
-    font-style: normal;
-    font-weight: 500;
-    line-height: 62px;
-    color: #3F3A3A;
-    border-left: 10px solid #7FDA89;
-    padding-left: 5%;
+.stat-card h3 {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 2rem;
 }
 
-.main-section-recipe img {
-    position: relative;
-    bottom: 90%;
-    height: auto;
-    width: 80%;
-    max-width:100%;
+.stat-card p {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
 }
 
-.main-section-recipe h4 {
-    font-family: 'airbnbcereal';
-    font-style: normal;
-    font-weight: 550;
-    line-height: 73px;
-    color: #3F3A3A;
+.calorie-finder-panel,
+.recipe-explorer-section,
+.weekly-plan-section {
+  margin-top: 28px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 20px;
 }
 
-.main-section-recipe button {
-    margin-top: 10px;
-    padding: 10px 30px;
-    background: #7FDA89;
-    border-radius: 8px;
-    color: white;
-}
-
-.new-recipe-box {
-    position: absolute;
-    z-index: -1;
-    top: 12%;
-    left: -15%;
-    width: 60vh;
-    height: 65vh;
-    background-color:#7FDA89;
-    border-radius: 10px;
+.finder-controls {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0;
+  max-width: 520px;
 }
 
 .recipe-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .recipe-toolbar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    width: min(100%, 560px);
-}
-
-.recipe-toolbar .form-control,
-.recipe-toolbar .form-select {
-    flex: 1;
-    min-width: 150px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 8px;
+  width: min(100%, 760px);
 }
 
 .recipe-counter {
-    color: #6f6f6f;
-    font-weight: 500;
-    margin-bottom: 20px;
+  margin: 14px 0 16px;
+  color: var(--text-secondary);
 }
 
-/* Popular Recipes Style */
 .recipe-card {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    background: #ffffff;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
 .popular-recipe-image {
-    width: 100%;
-    height: 35vh;
-    background-color: gray;
-    border-radius: 10px;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: end;
-    padding: 20px;
-    max-width:100%;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+  display: flex;
+  align-items: flex-start;
 }
 
-.popular-recipe-title{
-    position: relative;
-    bottom: 5vh;
-    font-family: 'airbnbcereal';
-    font-style: normal;
-    font-weight: 500;
-    line-height: 62px;
-    color: #3F3A3A;
-    border-left: 10px solid #7FDA89;
-    padding-left: 2%;
+.recipe-chip {
+  background: rgba(0, 0, 0, 0.64);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  padding: 6px 10px;
 }
 
 .recipe-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    color: #3F3A3A;
-    padding: 10px 14px;
-    border: 1px solid #7FDA89;
-    border-top: none;
-    font-size: 13px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recipe-meta h4 {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.recipe-meta p {
+  margin: 0;
+  color: var(--text-secondary);
 }
 
 .favorite-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.95);
-    color: #2E266F;
-    font-size: 22px;
-    z-index: 2;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #5b4ea8;
+  font-size: 20px;
+  z-index: 5;
 }
 
 .favorite-btn-active {
-    color: #f39c12;
-}
-
-.recommended-meals-section {
-    margin-top: 8vh;
+  color: #f39c12;
 }
 
 .meal-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  background: var(--bg-elevated);
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  overflow: hidden;
 }
 
 .meal-image {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
 }
 
-/* Footer Style */
-footer {
-    margin-top: 20vh;
-    height: 350px;
-    background-color: #7FDA89;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
 
-.footer-copyright {
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
+.weekly-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.hide-desktop {
-    display: none;
-    visibility: hidden;
+.day-card {
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--bg-elevated);
 }
 
-@media only screen and (max-width: 750px) {
-    .hero img {
-        position:absolute;
-        right: 0;
-        top: 0;
-        height: 90vh;
-        width: 100vh;
-        z-index: -2;
-        max-width:100%;
-    }
-
-    .bg-yellow {
-        background-image: #7FDA89;
-        z-index: -1 !important;
-        height: 90vh;
-        width: 100vh;
-        opacity: 0.8;
-    }
-
-    header .col-md-7 {
-        width: 100% !important;
-    }
-
-    .hero-left {
-        position: relative;
-        z-index: 1;
-        width: 80%;
-        bottom: 15vh;
-        left: 3vh;
-    }
-
-    .hero-text {
-        font-family: 'airbnbcereal';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 50px;
-        line-height: 70px;
-        align-items: center;
-        color: #2E266F;
-    }
-
-    .hero-col .search-input {
-        width: 80% !important;
-    }
-
-    .new-recipe-box {
-        display: block;
-        visibility: hidden;
-    }
-
+.day-card h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
 }
 
-@media only screen and (max-width: 575px) {
-    .hide-desktop {
-        display: block;
-        visibility: visible;
-    }
+@media (max-width: 992px) {
+  .hero-panel,
+  .stats-grid,
+  .weekly-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-    .nav {
-        display: none;
-        visibility: hidden;
-    }
+  .recipe-toolbar {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+}
 
-    .nav-item {
-        margin: 0;
-    }
+@media (max-width: 600px) {
+  .home-page {
+    padding-top: 12px;
+  }
 
-    .main-section-recipe img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 10px;
-        margin-bottom: 50px;
-        max-width:100%;
-    }
+  .hero-panel,
+  .stats-grid,
+  .weekly-grid,
+  .recipe-toolbar {
+    grid-template-columns: 1fr;
+  }
 
-    #popular-recipe-image {
-        width: 100%;
-        max-width:100%;
-    }
-
-    .hero-subtitle {
-        font-size: 16px;
-    }
-
-    .calorie-search-wrap {
-        padding: 12px;
-    }
+  .finder-controls {
+    flex-direction: column;
+  }
 }

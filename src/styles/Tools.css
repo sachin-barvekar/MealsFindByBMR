@@ -1,0 +1,56 @@
+.tool-page {
+  padding: 24px 0 60px;
+  min-height: 70vh;
+  background: var(--bg-page);
+}
+
+.tool-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 22px;
+}
+
+.tool-card h1,
+.tool-card h2,
+.tool-card h3 {
+  color: var(--text-primary);
+}
+
+.tool-card p,
+.tool-card li,
+.tool-card label,
+.tool-card small {
+  color: var(--text-secondary);
+}
+
+.metrics-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric {
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--bg-elevated);
+}
+
+.metric h4 {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 1.5rem;
+}
+
+.metric p {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 920px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

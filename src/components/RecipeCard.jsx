@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function RecipeCard(props) {
-  const { title, image, calories, id, isFavorite = false, onToggleFavorite } = props;
+  const { title, image, calories, id, isFavorite = false, onToggleFavorite, onAddToPlan } = props;
 
   return (
-    <div className="col-lg-4 col-md-6 col-xs-12 mb-4">
+    <div className="col-xl-4 col-md-6 mb-4">
       <article className="recipe-card h-100">
         <button
           type="button"
           className={`favorite-btn ${isFavorite ? "favorite-btn-active" : ""}`}
           onClick={(event) => {
             event.preventDefault();
+            event.stopPropagation();
             if (onToggleFavorite) {
               onToggleFavorite();
             }
@@ -22,13 +23,27 @@ export default function RecipeCard(props) {
           {isFavorite ? "★" : "☆"}
         </button>
 
-        <Link className="text-decoration-none" to={`/detail/${title?.toLowerCase()?.split(" ").join("-")}`}>
+        <Link className="text-decoration-none d-flex flex-column h-100" to={`/detail/${title?.toLowerCase()?.split(" ").join("-")}`}>
           <div className="popular-recipe-image" style={{ backgroundImage: `url('${image}')` }}>
-            <h3 style={{ textShadow: "0px 0px 2px rgba(0, 0, 0, 0.8)" }}>{title}</h3>
+            <span className="recipe-chip">Recipe #{id || "-"}</span>
           </div>
+
           <div className="recipe-meta">
-            <span>Recipe ID: {id || "-"}</span>
-            <span>Calories: {calories || "N/A"}</span>
+            <h4>{title}</h4>
+            <p>{calories ? `${Math.round(calories)} kcal` : "Calories unavailable"}</p>
+            {onAddToPlan ? (
+              <button
+                className="btn btn-sm btn-outline-success"
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  onAddToPlan({ id, title, calories, image });
+                }}
+              >
+                Add to weekly plan
+              </button>
+            ) : null}
           </div>
         </Link>
       </article>
