@@ -8,8 +8,6 @@ const Target = () => {
   const [calories, setCalories] = useState('');
   const [meals, setMeals] = useState([]);
 
-  const apiKey = 'YOUR_SPOONACULAR_API_KEY';
-
   const handleCaloriesChange = (e) => {
     setCalories(e.target.value);
   };

@@ -12,9 +12,10 @@ export default function Detail() {
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(true);
     const [currentRecipe, setCurrentRecipe] = useState(null);
+    const pathname = location?.pathname;
 
     useEffect(() => {
-        const currentSlug = location?.pathname?.split("/")[2];
+        const currentSlug = pathname?.split("/")[2];
 
         window.scrollTo(0, 0);
 
@@ -28,7 +29,7 @@ export default function Detail() {
                 console.error(error);
                 setIsLoading(false);
             });
-    }, []);
+    }, [pathname]);
 
     const RecipeIngredients = () => {
         const ingredientsResponse = currentRecipe?.ingredients;
@@ -70,7 +71,7 @@ export default function Detail() {
                         <div className="container">
                             <h1 className="text-center text-primary">{currentRecipe?.title}</h1>
                             <div className="d-flex justify-content-center" style={{ position: 'relative' }}>
-                                <img src={`${currentRecipe?.recipe_picture}`} className="main-image" />
+                                <img src={`${currentRecipe?.recipe_picture}`} className="main-image" alt={currentRecipe?.title || "Recipe"} />
                             
                             </div>
                             <div className="row mt-5">
