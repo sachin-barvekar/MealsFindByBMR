@@ -20,7 +20,7 @@ export default function Login() {
         if (localStorage.getItem("auth") === "true"  || state.auth) {
             navigate("/profile");
         }
-    }, []);
+    }, [navigate, state.auth]);
 
     //Check if checkbox term & condition is checked
     const checkTermCondition = () => {

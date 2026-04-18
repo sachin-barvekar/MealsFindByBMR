@@ -19,7 +19,7 @@ export default function Register() {
         if (localStorage.getItem("auth") === "true") {
             navigate("/profile");
         }
-    }, []);
+    }, [navigate]);
 
     //Check if checkbox term & condition is checked
     const checkTermCondition = () => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 // import styles
 import '../styles/Profile.css'
@@ -14,13 +13,14 @@ import axios from "axios";
 export default function Profile() {
     const navigate = useNavigate();
     const [profile, setProfile] = useState(null)
-    const [activeTab, setActiveTab] = useState("myRecipes");
+    const fullName = localStorage.getItem("userFullName");
+    const profilePicture = localStorage.getItem("userProfilePicture");
 
     useEffect(() => {
         if (!localStorage.getItem("auth")) {
             navigate("/login");
         }
-    }, []);
+    }, [navigate]);
 
     // Set user profile data from local storage
     useEffect(() => {
@@ -38,11 +38,7 @@ export default function Profile() {
         } else {
             setProfile(profileData);
         }
-    }, [localStorage.getItem("userFullName"), localStorage.getItem("userProfilePicture")]);
-
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-    };
+    }, [fullName, profilePicture]);
 
     return (
         <>
