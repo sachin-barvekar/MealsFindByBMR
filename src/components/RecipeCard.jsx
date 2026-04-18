@@ -2,20 +2,36 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function RecipeCard(props) {
-  const { title, image, calories , id} = props;
+  const { title, image, calories, id, isFavorite = false, onToggleFavorite } = props;
 
   return (
-    <>
-      <div className="col-md-4 col-xs-12 mb-4">
-          <Link className="text-decoration-none text-white" to={`/detail/${title?.toLowerCase()?.split(" ").join("-")}`}>
-            <div className="popular-recipe-image" style={{ backgroundImage: `url('${image}')`, borderBottomLeftRadius:'0', borderBottomRightRadius:'0' }}>
-              <h3 style={{ textShadow: "0px 0px 2px rgba(0, 0, 0, 0.8)"}}>{title}</h3>
-            </div>
-            <div className="popular-recipe-image" style={{padding: '10px', borderTopRightRadius: '0', borderTopLeftRadius: '0', border: '1px solid #7FDA89', height: '60px', backgroundColor: 'white'}}>
-              <h3 style={{fontSize:'20px',color:'white', textShadow: "1px 1px 2px rgba(0.2, 0.2, 0.2)" }} >id: {id} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Calories: {calories}</h3>
-              </div>
-          </Link>
-        </div>
-    </>
+    <div className="col-lg-4 col-md-6 col-xs-12 mb-4">
+      <article className="recipe-card h-100">
+        <button
+          type="button"
+          className={`favorite-btn ${isFavorite ? "favorite-btn-active" : ""}`}
+          onClick={(event) => {
+            event.preventDefault();
+            if (onToggleFavorite) {
+              onToggleFavorite();
+            }
+          }}
+          aria-label={isFavorite ? `Remove ${title} from favorites` : `Add ${title} to favorites`}
+          title={isFavorite ? "Remove from favorites" : "Save as favorite"}
+        >
+          {isFavorite ? "★" : "☆"}
+        </button>
+
+        <Link className="text-decoration-none" to={`/detail/${title?.toLowerCase()?.split(" ").join("-")}`}>
+          <div className="popular-recipe-image" style={{ backgroundImage: `url('${image}')` }}>
+            <h3 style={{ textShadow: "0px 0px 2px rgba(0, 0, 0, 0.8)" }}>{title}</h3>
+          </div>
+          <div className="recipe-meta">
+            <span>Recipe ID: {id || "-"}</span>
+            <span>Calories: {calories || "N/A"}</span>
+          </div>
+        </Link>
+      </article>
+    </div>
   );
 }
